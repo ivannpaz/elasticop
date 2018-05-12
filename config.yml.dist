@@ -1,0 +1,14 @@
+settings:
+  enabled: 1
+  other: "yes"
+
+clusters:
+  - name: "cluster_1"
+    description: "Cluster 1"
+    url: "http://localhost:9200"
+
+  - name: "cluster_2"
+    description: "Cluster 2"
+    url: "http://localhost:9200"
+    username: "does_not_exit"
+    password: "not_a_password"

@@ -35,7 +35,7 @@ func New() cli.Command {
 						)
 					}
 
-					fmt.Printf("List all templates at: %v\n", cluster)
+					fmt.Printf("List all templates at: %+v\n", cluster)
 					return nil
 				},
 			},

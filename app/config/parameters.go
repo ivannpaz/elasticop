@@ -9,17 +9,19 @@ import (
 // ClusterConfiguration defines parameters required to connect to a given
 // Elasticsearch server
 type ClusterConfiguration struct {
+	Name        string `json:"name,omitempty" yaml:"name"`
 	Description string `json:"description,omitempty" yaml:"description"`
-	URL         string `json:"url,omitempty"`
-	ClusterID   string `json:"cluster_id,omitempty"`
-	Username    string `json:"username,omitempty"`
-	Password    string `json:"password,omitempty"`
+	URL         string `json:"url,omitempty" yaml:"url"`
+	ClusterID   string `json:"cluster_id,omitempty" yaml:"cluster_id"`
+	Username    string `json:"username,omitempty" yaml:"username"`
+	Password    string `json:"password,omitempty" yaml:"password"`
 }
 
 // Configuration holds parameters required for the application ability to connect
 // to Elasticsearch servers
 type Configuration struct {
-	Clusters []ClusterConfiguration
+	Settings map[string]interface{} `json:"settings" yaml:"settings"`
+	Clusters []ClusterConfiguration `json:"clusters" yaml:"clusters"`
 }
 
 // Load a given yml file and create the Configuration representation

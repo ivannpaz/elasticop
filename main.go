@@ -24,6 +24,11 @@ func main() {
 			Value: "./config.yml",
 			Usage: "Configuration file",
 		},
+		cli.StringFlag{
+			Name:  "data, d",
+			Value: "",
+			Usage: "Data payload",
+		},
 	}
 
 	app.Commands = []cli.Command{

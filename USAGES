@@ -1,0 +1,5 @@
+$ elasticop configuration
+
+$ elasticop template <cluster_name>
+$ elasticop template get <cluster_name> <template_name>
+$ elasticop template put <cluster_name> <template_name> <templ_json|stdin?>

@@ -10,18 +10,32 @@ import (
 	"github.com/urfave/cli"
 )
 
+var version = "unset"
+
 func main() {
 	app := cli.NewApp()
+	app.Name = "Elastic Operator"
+	app.Usage = ""
+	app.Description = "Perform common tasks while working with Elasticsearch in a very simple manner"
+	app.Version = version
 
-	config := config.Load("config.yml")
+	app.Flags = []cli.Flag{
+		cli.StringFlag{
+			Name:  "configuration, c",
+			Value: "./config.yml",
+			Usage: "Configuration file",
+		},
+	}
 
 	app.Commands = []cli.Command{
 		{
 			Name:  "config",
-			Usage: "list conguration",
+			Usage: "List configuration values",
 			Action: func(c *cli.Context) error {
-				if json, err := json.Marshal(config); err == nil {
-					fmt.Print(json)
+				cfg := config.Load(c.GlobalString("configuration"))
+
+				if json, err := json.Marshal(cfg); err == nil {
+					fmt.Printf("%s", json)
 				}
 
 				return nil

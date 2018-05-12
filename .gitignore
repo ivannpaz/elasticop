@@ -1,2 +1,4 @@
 /vendor
 /elasticop
+/*.yml
+!/.drone.yml

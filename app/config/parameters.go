@@ -1,6 +1,7 @@
 package config
 
 import (
+	"fmt"
 	"io/ioutil"
 
 	"gopkg.in/yaml.v2"
@@ -38,4 +39,27 @@ func Load(fileName string) Configuration {
 	}
 
 	return configuration
+}
+
+// ClusterNames returns the names of all configured clusters
+func (c Configuration) ClusterNames() []string {
+	var names []string
+
+	for _, n := range c.Clusters {
+		names = append(names, n.Name)
+	}
+
+	return names
+}
+
+// Cluster will return the configuration for a given clusterName or an error if
+// not found among the configured ones
+func (c Configuration) Cluster(clusterName string) (ClusterConfiguration, error) {
+	for _, n := range c.Clusters {
+		if n.Name == clusterName {
+			return n, nil
+		}
+	}
+
+	return ClusterConfiguration{}, fmt.Errorf("requested configuraion for cluster %s was not found", clusterName)
 }

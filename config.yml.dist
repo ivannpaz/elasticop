@@ -12,3 +12,9 @@ clusters:
     url: "http://localhost:9200"
     username: "does_not_exit"
     password: "not_a_password"
+
+  - name: "cluster_3"
+    description: "Cluster 2"
+    cluster_id: "ff02dd45dd21eeff"
+    username: "does_not_exit"
+    password: "not_a_password"

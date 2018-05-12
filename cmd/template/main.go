@@ -12,33 +12,29 @@ func New() cli.Command {
 	return cli.Command{
 		Name:        "template",
 		Description: "Templates management",
+		Action: func(c *cli.Context) error {
+			cfg := config.Load(c.GlobalString("configuration"))
+
+			if c.NArg() == 0 {
+				return fmt.Errorf(
+					"Please provide cluster name from the %v",
+					cfg.ClusterNames(),
+				)
+			}
+
+			cluster, err := cfg.Cluster(c.Args().First())
+			if err != nil {
+				return fmt.Errorf(
+					"Requested cluster named %s is not configured. Available names are %v",
+					c.Args().First(),
+					cfg.ClusterNames(),
+				)
+			}
+
+			fmt.Printf("List all templates at: %+v\n", cluster)
+			return nil
+		},
 		Subcommands: []cli.Command{
-			{
-				Name:        "list",
-				Description: "Get template definition",
-				Action: func(c *cli.Context) error {
-					cfg := config.Load(c.GlobalString("configuration"))
-
-					if c.NArg() == 0 {
-						return fmt.Errorf(
-							"Please provide cluster name from the %v",
-							cfg.ClusterNames(),
-						)
-					}
-
-					cluster, err := cfg.Cluster(c.Args().First())
-					if err != nil {
-						return fmt.Errorf(
-							"Requested cluster named %s is not among %v",
-							c.Args().First(),
-							cfg.ClusterNames(),
-						)
-					}
-
-					fmt.Printf("List all templates at: %+v\n", cluster)
-					return nil
-				},
-			},
 			{
 				Name:        "get",
 				Description: "Get a given template",

@@ -17,7 +17,7 @@ func New() cli.Command {
 
 			if c.NArg() == 0 {
 				return fmt.Errorf(
-					"Please provide cluster name from the %v",
+					"Please provide cluster name from %+v",
 					cfg.ClusterNames(),
 				)
 			}

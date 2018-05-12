@@ -1,4 +1,4 @@
-# Elastic Operator Toolkit
+# [WIP] Elastic Operator Toolkit
 
 Provide an easy (albeit simplified) access to some common tasks performed while using Elasticsearch.
 
